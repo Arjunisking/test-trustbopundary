@@ -1,0 +1,26 @@
+name: TrustBoundary Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  trustboundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run TrustBoundary
+        id: trustboundary
+        uses: Arjunisking/trustboundary@v1
+        with:
+          target_path: .
+          enforce: "true"
+          report_path: trustboundary-report.html
+
+      - name: Print outputs
+        run: |
+          echo "total_findings=${{ steps.trustboundary.outputs.total_findings }}"
+          echo "confirmed_critical_count=${{ steps.trustboundary.outputs.confirmed_critical_count }}"
+          echo "blocked=${{ steps.trustboundary.outputs.blocked }}"
+          echo "report_path=${{ steps.trustboundary.outputs.report_path }}"
