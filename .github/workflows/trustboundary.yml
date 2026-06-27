@@ -12,7 +12,7 @@ jobs:
 
       - name: Run TrustBoundary
         id: trustboundary
-        uses: Arjunisking/trustboundary@v1
+        uses: Arjunisking/trustboundary@main
         with:
           target_path: .
           enforce: "true"
